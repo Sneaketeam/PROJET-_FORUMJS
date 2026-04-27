@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Forum - S'identifier</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header class="navbar">
+        <a href="/" class="netflix-logo">NETFLIX FORUM</a>
+    </header>
+
+    <div class="showcase">
+        <div class="form-wrapper">
+            
+            <!-- Connexion -->
+            <div id="login-box" class="form-box">
+                <h2>S'identifier</h2>
+                <form id="login-form">
+                    <div class="input-group">
+                        <input type="text" id="login-id" placeholder="Pseudo ou E-mail" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="login-password" placeholder="Mot de passe" required>
+                    </div>
+                    <button type="submit" class="btn-red">S'identifier</button>
+                </form>
+                <div class="form-help">
+                    <p>Première fois sur le forum ? <span class="toggle-link" data-action="register">S'inscrire.</span></p>
+                </div>
+            </div>
+
+            <!-- Inscription -->
+            <div id="register-box" class="form-box hidden">
+                <h2>S'inscrire</h2>
+                <form id="register-form">
+                    <div class="input-group">
+                        <input type="text" id="reg-username" placeholder="Pseudo (Lettres/chiffres uniquement)" required pattern="[a-zA-Z0-9]+">
+                    </div>
+                    <div class="input-group">
+                        <input type="email" id="reg-email" placeholder="Adresse E-mail" required>
+                    </div>
+                    
+                    <!-- CHAMP MOT DE PASSE + BARRE DE SOLIDITÉ -->
+                    <div class="input-group">
+                        <input type="password" id="reg-password" placeholder="Mot de passe (Min 8, 1 Maj, 1 Spécial)" required>
+                        
+                        <div class="password-strength">
+                            <div class="strength-bar">
+                                <div id="strength-progress" class="strength-progress"></div>
+                            </div>
+                            <div class="strength-text" id="strength-text">Force du mot de passe</div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-red">Créer mon compte</button>
+                </form>
+                <div class="form-help">
+                    <p>Déjà un compte ? <span class="toggle-link" data-action="login">S'identifier.</span></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

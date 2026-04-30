@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Forum - Accueil</title>
+    <!-- On charge le style global, puis le style spécifique du forum -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/forum.css">
+</head>
+<body>
+    <!-- === CONTENEUR DE NOTIFICATIONS === -->
+    <div id="notification-container" class="notification-container"></div>
+
+    <!-- === BARRE DE NAVIGATION === -->
+    <header class="navbar forum-navbar">
+        <a href="/forum.html" class="netflix-logo">NETFLIX FORUM</a>
+<div class="user-controls">
+            <!-- Profil utilisateur (Façon Netflix) -->
+            <div class="user-profile">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png" alt="Avatar" class="avatar">
+                <span id="current-username">...</span>
+            </div>
+
+            <!-- Le fameux bouton pour créer un topic (F-4) -->
+            <button id="btn-create-topic" class="btn-red small-btn">+ Nouveau Topic</button>
+            <button id="btn-logout" class="btn-outline">Déconnexion</button>
+        </div>
+    </header>
+
+    <!-- === CONTENU PRINCIPAL === -->
+    <main class="forum-container">
+        
+        <!-- SECTION TAGS (Catégories) -->
+        <section class="tags-section">
+            <h2 class="section-title">Parcourir par catégories</h2>
+            <div class="tags-list" id="tags-container">
+                <!-- Les catégories seront injectées ici en JS -->
+                <button class="tag-btn active">Tous</button>
+                <button class="tag-btn">Séries</button>
+                <button class="tag-btn">Films</button>
+                <button class="tag-btn">Théories</button>
+            </div>
+        </section>
+
+        <!-- SECTION TOPICS -->
+        <section class="topics-section">
+            <h2 class="section-title">Discussions récentes</h2>
+            
+            <!-- C'est ici que les topics apparaîtront sous forme de cartes -->
+            <div class="topics-grid" id="topics-container">
+                <p style="color: #b3b3b3; text-align: center; width: 100%;">Chargement des topics...</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="/js/forum.js"></script>
+</body>
+</html>

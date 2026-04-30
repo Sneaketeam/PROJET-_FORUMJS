@@ -7,8 +7,9 @@ const path = require('path');
 // Test de la connexion MySQL
 const pool = require('./config/database');
 
-// 🔌 IMPORTATION DES ROUTES (Nouveau !)
+// 🔌 IMPORTATION DES ROUTES
 const authRoutes = require('./routes/authRoutes');
+const topicRoutes = require('./routes/topicRoutes'); // <-- NOUVEAU : Import des topics
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -31,10 +32,10 @@ app.use(session({
 app.use(express.static(path.join(__dirname, 'public')));
 
 // ==========================================
-// 🔀 BRANCHEMENT DES ROUTES (Nouveau !)
+// 🔀 BRANCHEMENT DES ROUTES
 // ==========================================
-// On dit à Express : "Si une URL commence par /auth, va chercher dans authRoutes.js"
 app.use('/auth', authRoutes);
+app.use('/topics', topicRoutes); // <-- NOUVEAU : Branchement de la prise
 
 // ROUTES (Pages HTML)
 app.get('/', (req, res) => {

@@ -2,6 +2,32 @@
 document.addEventListener('DOMContentLoaded', () => {
     
     // ==========================================
+    // 0. SYSTÈME DE NOTIFICATIONS
+    // ==========================================
+    function showNotification(message, type = 'success') {
+        const container = document.getElementById('notification-container');
+        if (!container) return;
+
+        // On crée la bulle de notification
+        const notif = document.createElement('div');
+        notif.classList.add('notification', type);
+        notif.innerHTML = message;
+
+        container.appendChild(notif);
+
+        // Petit délai pour laisser le CSS appliquer l'animation d'entrée
+        setTimeout(() => {
+            notif.classList.add('show');
+        }, 10);
+
+        // Au bout de 4 secondes, on cache et on supprime
+        setTimeout(() => {
+            notif.classList.remove('show');
+            setTimeout(() => notif.remove(), 400); // Attend la fin de l'animation CSS
+        }, 4000);
+    }
+
+    // ==========================================
     // 1. BASCULE ENTRE CONNEXION ET INSCRIPTION
     // ==========================================
     const toggleLinks = document.querySelectorAll('.toggle-link');
@@ -31,10 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateStrengthBar(password) {
         if (!strengthProgress || !strengthText) return;
-
         const strength = checkPasswordStrength(password);
-
-        // On retire toutes les classes de couleur
         strengthProgress.classList.remove('weak', 'medium', 'strong');
 
         if (password.length === 0) {
@@ -47,23 +70,16 @@ document.addEventListener('DOMContentLoaded', () => {
             let color = '#b3b3b3';
 
             if (strength === 'weak') {
-                width = '33%';
-                label = 'Faible';
-                color = '#e50914';
+                width = '33%'; label = 'Faible'; color = '#e50914';
                 strengthProgress.classList.add('weak');
             } else if (strength === 'medium') {
-                width = '66%';
-                label = 'Moyen';
-                color = '#f5a623';
+                width = '66%'; label = 'Moyen'; color = '#f5a623';
                 strengthProgress.classList.add('medium');
             } else if (strength === 'strong') {
-                width = '100%';
-                label = 'Fort';
-                color = '#2ecc71';
+                width = '100%'; label = 'Fort'; color = '#2ecc71';
                 strengthProgress.classList.add('strong');
             }
 
-            // On applique simplement la nouvelle largeur, la transition CSS fera le reste !
             strengthProgress.style.width = width;
             strengthText.textContent = label;
             strengthText.style.color = color;
@@ -75,55 +91,87 @@ document.addEventListener('DOMContentLoaded', () => {
         if (password.length >= 8) score++;
         if (/[A-Z]/.test(password)) score++;
         if (/[0-9]/.test(password)) score++;
-        if (/[^A-Za-z0-9]/.test(password)) score++; // Caractère spécial
-
+        if (/[^A-Za-z0-9]/.test(password)) score++;
         if (score <= 2) return 'weak';
         if (score === 3) return 'medium';
         return 'strong';
     }
 
     if (passwordInput) {
-        passwordInput.addEventListener('input', () => {
-            updateStrengthBar(passwordInput.value);
-        });
+        passwordInput.addEventListener('input', () => updateStrengthBar(passwordInput.value));
     }
 
     // ==========================================
-    // 3. SOUMISSION DE L'INSCRIPTION (F-1)
+    // 3. SOUMISSION DE L'INSCRIPTION
     // ==========================================
     const registerForm = document.getElementById('register-form');
 
     if (registerForm) {
         registerForm.addEventListener('submit', async (e) => {
-            e.preventDefault(); // Empêche le rechargement de la page
+            e.preventDefault();
 
             const username = document.getElementById('reg-username').value;
             const email = document.getElementById('reg-email').value;
             const password = document.getElementById('reg-password').value;
 
             try {
-                // Requête vers ton backend Express
                 const response = await fetch('/auth/register', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username, email, password })
                 });
 
                 const data = await response.json();
 
                 if (response.ok) {
-                    alert('✅ ' + data.message);
-                    registerForm.reset(); // Vide le formulaire
-                    updateStrengthBar(''); // Remet la barre de force à zéro
-                    document.querySelector('[data-action="login"]').click(); // Repasse sur l'onglet login
+                    showNotification('✅ ' + data.message, 'success'); // <-- MAGIE ICI !
+                    registerForm.reset();
+                    updateStrengthBar('');
+                    document.querySelector('[data-action="login"]').click();
                 } else {
-                    alert('❌ Erreur : ' + data.error);
+                    showNotification('❌ ' + data.error, 'error'); // <-- MAGIE ICI !
                 }
             } catch (error) {
-                console.error('Erreur de communication:', error);
-                alert('❌ Impossible de joindre le serveur.');
+                console.error(error);
+                showNotification('❌ Impossible de joindre le serveur.', 'error');
+            }
+        });
+    }
+
+    // ==========================================
+    // 4. SOUMISSION DE LA CONNEXION
+    // ==========================================
+    const loginForm = document.getElementById('login-form');
+
+    if (loginForm) {
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const identifier = document.getElementById('login-id').value;
+            const password = document.getElementById('login-password').value;
+
+            try {
+                const response = await fetch('/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ identifier, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showNotification('🍿 ' + data.message, 'success'); // <-- MAGIE ICI !
+                    
+                    // Petit délai avant de changer de page pour laisser le temps de lire
+                    setTimeout(() => {
+                        window.location.href = data.redirect;
+                    }, 1000);
+                } else {
+                    showNotification('❌ ' + data.error, 'error'); // <-- MAGIE ICI !
+                }
+            } catch (error) {
+                console.error(error);
+                showNotification('❌ Impossible de joindre le serveur.', 'error');
             }
         });
     }

@@ -1,5 +1,5 @@
 const mysql = require('mysql2/promise');
-const path = require('path'); // <--- IL MANQUAIT CETTE LIGNE
+const path = require('path');
 
 // On remonte de deux niveaux pour atteindre le .env à la racine
 require('dotenv').config({ path: path.join(__dirname, '../../.env') });
@@ -7,7 +7,7 @@ require('dotenv').config({ path: path.join(__dirname, '../../.env') });
 const pool = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
-    password: process.env.DB_PASS,
+    password: process.env.DB_PASSWORD, // <-- LA CORRECTION EST ICI !
     database: process.env.DB_NAME,
     waitForConnections: true,
     connectionLimit: 10,
@@ -17,12 +17,12 @@ const pool = mysql.createPool({
 // Test de connexion
 pool.getConnection()
     .then(conn => {
-        console.log('✅ MySQL');
+        console.log('✅ MySQL (Connecté)');
         conn.release();
     })
     .catch((err) => {
         console.log('❌ MySQL (Erreur de connexion)');
-        // console.error(err); // Décommente cette ligne si tu veux voir le détail de l'erreur
+        console.error('🚨 DÉTAIL :', err.message); // On garde ça allumé pour le débogage !
     });
 
 module.exports = pool;

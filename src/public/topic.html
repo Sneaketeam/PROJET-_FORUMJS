@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Forum - Discussion</title>
+    <!-- Chargement de nos 3 fichiers CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/forum.css">
+    <link rel="stylesheet" href="/css/topic.css">
+</head>
+<body>
+    <!-- 🔔 Système de notifications (les petits pop-ups) -->
+    <div id="notification-container" class="notification-container"></div>
+
+    <!-- 🧭 Barre de navigation en haut -->
+    <header class="navbar forum-navbar">
+        <a href="/forum.html" class="netflix-logo">NETFLIX FORUM</a>
+        <div class="user-controls">
+            <div class="user-profile">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png" alt="Avatar" class="avatar">
+                <span id="current-username">...</span>
+            </div>
+            <a href="/forum.html" class="btn-red small-btn">Retour</a>
+            <button id="btn-logout" class="btn-outline small-btn">Déconnexion</button>
+        </div>
+    </header>
+
+    <!-- 💬 Contenu principal -->
+    <main class="forum-container topic-page-container">
+        
+        <!-- Le message d'origine (Sujet) -->
+        <div id="original-topic" class="original-topic-card">
+            <p style="color: #b3b3b3; text-align: center;">Chargement de la discussion...</p>
+        </div>
+
+        <!-- La zone des réponses -->
+        <div class="replies-section">
+            <div class="replies-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 class="replies-title">Réponses</h3>
+                
+                <!-- 🔄 Système de Tri (F-8) -->
+<div class="sort-controls">
+    <button class="sort-btn active" data-sort="recent">🔥 Nouveaux</button>
+    <button class="sort-btn" data-sort="oldest">🕒 Anciens</button>
+    <button class="sort-btn" data-sort="popular">🌟 Populaires</button>
+</div>
+            </div>
+            
+            <!-- Liste où le JS va injecter les messages avec scores -->
+            <div id="messages-container" class="messages-list"></div>
+
+            <!-- 📑 Système de Pagination (F-9)[cite: 1] -->
+            <div id="pagination-controls" class="pagination-container" style="display: flex; justify-content: center; align-items: center; gap: 20px; margin: 20px 0;">
+                <button id="prev-page" class="btn-outline small-btn" disabled>Précédent</button>
+                <span id="page-info" style="color: #b3b3b3;">Page 1</span>
+                <button id="next-page" class="btn-outline small-btn">Suivant</button>
+            </div>
+
+            <!-- Formulaire pour écrire une réponse -->
+            <div class="reply-box">
+                <form id="reply-form">
+                    <textarea id="reply-body" placeholder="Ajouter une réponse à cette discussion..." required></textarea>
+                    <div class="reply-actions">
+                        <button type="submit" class="btn-red">Répondre</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Branchement du moteur JS -->
+    <script src="/js/topic.js"></script>
+</body>
+</html>

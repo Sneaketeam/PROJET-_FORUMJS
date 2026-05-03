@@ -1,15 +1,17 @@
 /* ========================================= */
-/* BARRE DE NAVIGATION (Spécifique Forum)    */
+/* BARRE DE NAVIGATION (Forum + Topic)       */
 /* ========================================= */
 .forum-navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 50px;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0) 100%);
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(8px);
 }
 
 .user-controls {
@@ -18,28 +20,24 @@
     align-items: center;
 }
 
-/* Petits boutons pour la navbar */
-.small-btn {
-    padding: 10px 20px;
-    font-size: 1rem;
-    margin: 0;
-    width: auto;
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: 15px;
 }
 
-.btn-outline {
-    padding: 10px 20px;
-    background-color: transparent;
-    color: #fff;
-    border: 1px solid #fff;
+.avatar {
+    width: 32px;
+    height: 32px;
     border-radius: 4px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.2s ease;
+    border: 1px solid #333;
 }
 
-.btn-outline:hover {
-    background-color: #fff;
-    color: var(--netflix-black);
+#current-username {
+    font-weight: 500;
+    color: #fff;
+    font-size: 1rem;
 }
 
 /* ========================================= */
@@ -59,15 +57,46 @@
 }
 
 /* ========================================= */
-/* SECTION TAGS (Catégories)                 */
+/* SECTION RECHERCHE                         */
+/* ========================================= */
+.search-container {
+    margin-bottom: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.search-bar {
+    width: 100%;
+    max-width: 780px;
+    padding: 18px 30px;
+    border-radius: 50px;
+    border: 1px solid #444;
+    background-color: #1a1a1a;
+    color: #fff;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.search-bar:focus {
+    outline: none;
+    border-color: var(--netflix-red);
+    background-color: #222;
+    box-shadow: 0 0 20px rgba(229, 9, 20, 0.3);
+}
+
+/* ========================================= */
+/* TAGS & CATÉGORIES                         */
 /* ========================================= */
 .tags-section {
-    margin-bottom: 40px;
+    margin-bottom: 50px;
 }
 
 .tags-list {
     display: flex;
-    gap: 15px;
+    gap: 20px;
     flex-wrap: wrap;
 }
 
@@ -75,17 +104,17 @@
     background-color: rgba(51, 51, 51, 0.8);
     color: #fff;
     border: 1px solid transparent;
-    padding: 8px 20px;
-    border-radius: 20px;
+    padding: 12px 30px;
+    border-radius: 30px;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 500;
     transition: all 0.2s ease;
 }
 
 .tag-btn:hover {
     background-color: #e5e5e5;
-    color: var(--netflix-black);
+    color: #000;
 }
 
 .tag-btn.active {
@@ -95,7 +124,7 @@
 }
 
 /* ========================================= */
-/* SECTION TOPICS (Grille de cartes)         */
+/* GRILLE DES TOPICS + TITRES AMÉLIORÉS      */
 /* ========================================= */
 .topics-grid {
     display: grid;
@@ -124,9 +153,10 @@
 }
 
 .topic-title {
-    font-size: 1.25rem;
+    font-size: 1.35rem;
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    line-height: 1.3;
     color: #fff;
 }
 
@@ -151,38 +181,17 @@
     color: #ddd;
 }
 
-/* === PROFIL UTILISATEUR === */
-.user-profile {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-right: 15px;
-}
-
-.avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 4px;
-    border: 1px solid #333;
-}
-
-#current-username {
-    font-weight: 500;
-    color: #fff;
-    font-size: 1rem;
-}
-
 /* ========================================= */
-/* MODALE DE CRÉATION DE TOPIC               */
+/* MODALE CRÉATION TOPIC (titre corrigé)     */
 /* ========================================= */
 .modal-overlay {
-    display: none; /* Cachée par défaut */
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Fond sombre transparent */
+    background-color: rgba(0, 0, 0, 0.8);
     z-index: 1000;
     justify-content: center;
     align-items: center;
@@ -190,7 +199,7 @@
 }
 
 .modal-overlay.active {
-    display: flex; /* S'affiche quand la classe active est ajoutée */
+    display: flex;
 }
 
 .modal-content {
@@ -231,7 +240,9 @@
     font-size: 1.8rem;
 }
 
-.modal-content .input-group textarea {
+/* Inputs de la modale (titre + texte) - CORRIGÉ */
+.modal-input-title,
+.modal-textarea {
     width: 100%;
     padding: 15px;
     background-color: #333;
@@ -239,16 +250,20 @@
     border-radius: 4px;
     color: #fff;
     font-size: 1rem;
-    resize: vertical;
-    min-height: 150px;
-    margin-top: 15px;
     font-family: inherit;
 }
 
-.modal-content .input-group textarea:focus {
+.modal-input-title:focus,
+.modal-textarea:focus {
     border-color: #b3b3b3;
     outline: none;
     background-color: #444;
+}
+
+.modal-textarea {
+    resize: vertical;
+    min-height: 150px;
+    margin-top: 15px;
 }
 
 .modal-actions {
@@ -257,3 +272,4 @@
     gap: 15px;
     margin-top: 20px;
 }
+

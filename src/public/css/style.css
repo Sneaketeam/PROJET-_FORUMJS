@@ -20,7 +20,9 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* === LOGO === */
+/* ========================================= */
+/* LOGO NETFLIX                              */
+/* ========================================= */
 .netflix-logo {
     color: var(--netflix-red);
     font-size: 2.8rem;
@@ -35,7 +37,9 @@ body {
     filter: drop-shadow(0 6px 12px rgba(229, 9, 20, 0.5));
 }
 
-/* === BOUTON (Global car réutilisé) === */
+/* ========================================= */
+/* BOUTONS (réutilisés partout)              */
+/* ========================================= */
 .btn-red {
     display: block;
     margin: 24px auto 0 auto;
@@ -62,13 +66,39 @@ body {
     transform: scale(0.97);
 }
 
-/* === UTILITAIRES === */
+.small-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    margin: 0;
+    width: auto;
+    height: fit-content;
+}
+
+.btn-outline {
+    padding: 10px 20px;
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-outline:hover {
+    background-color: #fff;
+    color: var(--netflix-black);
+}
+
+/* ========================================= */
+/* UTILITAIRES                               */
+/* ========================================= */
 .hidden {
     display: none;
 }
 
 /* ========================================= */
-/* NOTIFICATIONS (Toasts style Netflix)      */
+/* NOTIFICATIONS (Toasts Netflix)            */
 /* ========================================= */
 .notification-container {
     position: fixed;
@@ -91,25 +121,46 @@ body {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-    
-    /* Animation de départ (cachée sur la droite) */
     transform: translateX(120%);
     opacity: 0;
-    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Effet de rebond fluide */
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-/* Classe ajoutée en JS pour faire glisser la notification */
 .notification.show {
     transform: translateX(0);
     opacity: 1;
 }
 
-/* Couleurs selon le type */
 .notification.success {
-    border-left: 5px solid #2ecc71; /* Vert succès */
+    border-left: 5px solid #2ecc71;
 }
 
 .notification.error {
-    border-left: 5px solid var(--netflix-red); /* Rouge Netflix pour les erreurs */
+    border-left: 5px solid var(--netflix-red);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 15px rgba(229, 9, 20, 0.3);
+}
+
+/* ========================================= */
+/* BOUTON ROUGE PETIT (Navbar)               */
+/* ========================================= */
+.btn-red.small-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    margin: 0;
+    padding: 11px 24px;
+    font-size: 1.05rem;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.btn-red.small-btn:hover {
+    background-color: var(--netflix-red-hover);
+    box-shadow: 0 12px 28px rgba(229, 9, 20, 0.65);
+    transform: scale(1.03);
+}
+
+.btn-red.small-btn:active {
+    transform: scale(0.97);
 }

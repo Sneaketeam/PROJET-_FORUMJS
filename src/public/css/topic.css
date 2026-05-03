@@ -1,0 +1,191 @@
+/* ========================================= */
+/* PAGE TOPIC - STYLE NETFLIX                */
+/* ========================================= */
+
+/* Conteneur principal (on garde une largeur raisonnable pour le reste) */
+.topic-page-container {
+    padding: 40px 50px;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+/* ========================================= */
+/* CARTE DU SUJET PRINCIPAL                  */
+/* ========================================= */
+.original-topic-card {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 40px;
+    margin-bottom: 50px;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    box-sizing: border-box;
+}
+
+.original-topic-card h1,
+.original-topic-card .topic-title {
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+    color: #fff;
+    line-height: 1.25;
+}
+
+.original-topic-card .topic-meta {
+    display: flex;
+    justify-content: space-between;
+    color: #b3b3b3;
+    font-size: 0.95rem;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #333;
+}
+
+.original-topic-card .topic-content {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: #e5e5e5;
+}
+
+/* ========================================= */
+/* ZONE DES RÉPONSES                         */
+/* ========================================= */
+.replies-title {
+    font-size: 1.65rem;
+    color: #e5e5e5;
+    margin-bottom: 25px;
+    padding-left: 8px;
+}
+
+.messages-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 40px;
+    width: 100%;
+}
+
+.message-card {
+    background-color: #141414;
+    border-left: 5px solid #333;
+    padding: 28px;
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    transition: border-left-color 0.3s ease;
+}
+
+.message-card:hover {
+    border-left-color: var(--netflix-red);
+}
+
+/* ========================================= */
+/* FORMULAIRE DE RÉPONSE → TRÈS LARGE HORIZONTALE */
+/* ========================================= */
+.replies-section {
+    width: 100%;
+}
+
+.reply-box {
+    background-color: #1a1a1a;
+    padding: 40px;
+    border-radius: 12px;
+    border: 1px solid #333;
+    width: 100%;
+    max-width: 1600px;           /* ← très large */
+    margin: 60px auto 0 auto;    /* centré */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+#reply-body {
+    width: 100% !important;
+    min-height: 360px;           /* hauteur confortable */
+    background-color: #333;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    color: #fff;
+    padding: 28px;
+    font-size: 1.15rem;
+    resize: vertical;
+    margin-bottom: 20px;
+    font-family: inherit;
+    line-height: 1.65;
+    box-sizing: border-box;
+}
+
+#reply-body:focus {
+    outline: none;
+    border-color: var(--netflix-red);
+    box-shadow: 0 0 0 4px rgba(229, 9, 20, 0.2);
+}
+
+/* Bouton bien à droite */
+.reply-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.vote-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #333;
+}
+
+.vote-btn {
+    background: transparent;
+    border: 1px solid #444;
+    color: #fff;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: 0.2s;
+}
+
+.vote-btn:hover {
+    border-color: #e50914; /* Rouge Netflix */
+}
+
+.vote-count {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #e5e5e5;
+}
+
+.replies-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.sort-btn {
+    background: #222;
+    border: 1px solid #444;
+    color: #b3b3b3;
+    padding: 5px 12px;
+    cursor: pointer;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    transition: 0.3s;
+}
+
+.sort-btn.active {
+    background: #e50914; /* Rouge Netflix */
+    color: white;
+    border-color: #e50914;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin: 30px 0;
+    color: #b3b3b3;
+}
